@@ -77,12 +77,16 @@
                   </div>
                 </div>
               {%- endif -%}
-              <div class="multicolumn-card__info">
+              <div class="multicolumn-card__info center">
                 {%- if block.settings.title != blank -%}
                   <h3>{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
+                <span> {% include 'icon-quote' %}</span>
                 {%- if block.settings.text != blank -%}
                   <div class="rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {%- if block.settings.author != blank -%}
+                  <cite>-{{ block.settings.author | escape }}</cite>
                 {%- endif -%}
                 {%- if block.settings.link_label != blank -%}
                   <a class="link animate-arrow" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>{{ block.settings.link_label | escape }}<span class="icon-wrap">&nbsp;{% render 'icon-arrow' %}</span></a>
@@ -93,8 +97,8 @@
         {%- endfor -%}
       </ul>
 
-      {%- if show_mobile_slider -%}
-        <div class="slider-buttons no-js-hidden medium-hide">
+      
+        <div class="slider-buttons no-js-hidden ">
           <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
           <div class="slider-counter caption">
             <span class="slider-counter--current">1</span>
@@ -104,7 +108,7 @@
           </div>
           <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
         </div>
-      {%- endif -%}
+    
     </slider-component>
     <div class="center{% if show_mobile_slider %} small-hide medium-hide{% endif %}">
       {%- if section.settings.button_label != blank -%}
@@ -277,8 +281,9 @@
         },
         {
           "type": "text",
-          "id": "link_label",
-          "label": "t:sections.multicolumn.blocks.column.settings.link_label.label"
+          "id": "author",
+          "default": "Author",
+          "label": "Author's Name"
         }
       ]
     }
